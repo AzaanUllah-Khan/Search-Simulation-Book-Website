@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Simulation - Book Shop</title>
+    <link rel="icon"
+        href="img/design-can-be-used-as-logo-icon-as-complement-to-design-book-search-logo-icon-design-127369246.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .main {
+            width: 50%;
+            background-color: whitesmoke;
+            border-radius: 20px;
+            height: 600px;
+            overflow: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            width: 1px;
+        }
+
+        .header {
+            font-family: 'Courier New', Courier, monospace;
+            width: 100%;
+            background-color: cadetblue;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+
+        .search {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search input {
+            width: 75%;
+            padding: 5px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            outline: none;
+            border: none;
+            border-radius: 30px;
+        }
+
+        .search input::placeholder {
+            color: grey;
+            font-weight: lighter;
+            font-size: 15px;
+        }
+
+        .search button {
+            width: 10%;
+            outline: none;
+            display: flex;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            background-color: white;
+            padding: 7px 18px;
+            text-align: center;
+        }
+
+        .search button i {
+            font-size: 15px;
+        }
+
+        .section {
+            margin: 5px 0 0;
+            width: 100%;
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .item {
+            padding: 10px;
+            border-bottom: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            width: 100%;
+        }
+
+        .item .img {
+            width: 20%;
+        }
+
+        .item .img img {
+            width: 60%;
+        }
+
+        .section .about {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .about .name {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 30px;
+            padding: 10px;
+        }
+
+        .about .writer {
+            font-style: italic;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .about .price {
+            font-weight: bold;
+        }
+
+        .buy {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .buy button {
+            background-color: olivedrab;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            outline: none;
+            border: none;
+        }
+        #nonMsg{
+            text-align: center;
+            font-family: fantasy;
+            font-weight: lighter;
+            color: rgb(92, 92, 92);
+            display: none;
+        }
+        @media screen and (max-width:1140px) {
+            .header{
+                flex-direction: column;
+            }
+            .header .search{
+                width: 80%;
+            }
+            .buy i{
+                display: none;
+            }
+        }
+        @media screen and (max-width:840px) {
+            .main{
+                width: 70%;
+            }
+        }
+        @media screen and (max-width:550px) {
+            .main{
+                width: 90%;
+            }
+            .header .search{
+                width: 90%;
+            }
+            .buy i{
+                display: block;
+            }
+            .buy p{
+                display: none;
+            }
+            h1.name{
+                width: 100%;
+            }
+            .item .about{
+                width: 70%;
+            }
+            .buy{
+                width: 10%;
+            }
+        }
+        </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <h1 onclick="r()">Book Store</h1>
+            <div class="search">
+                <input type="text" placeholder="Search Any Book" id="input">
+                <button onclick="c()"><i class="fa fa-search"></i></button>
+                <button onclick="writer()"><i class="fa fa-user"></i></button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="item james" id="atomicHabits">
+                <div class="img">
+                    <img src="./img/41JdnarZkXL._AC_UF1000,1000_QL80_.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Atomic Habits</h1>
+                    <p class="writer">Writer: James Clear</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item robert" id="RichDadPoorDad">
+                <div class="img">
+                    <img src="./img/51AHZGhzZEL-1.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Rich Dad Poor Dad</h1>
+                    <p class="writer">Writer: Robert T Kiosaki</p>
+                    <p class="price">$15</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item skotts" id="TheGreatGastby">
+                <div class="img">
+                    <img src="./img/the great gatsby.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">The Great Gatsby</h1>
+                    <p class="writer">Writer: T.Skotts Fitsgrazer</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item allama" id="BaghOBahar">
+                <div class="img">
+                    <img src="./img/bagh o bahar.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Bagh O bahar</h1>
+                    <p class="writer">Writer: Allama Iqbal</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item george" id="nineteen84">
+                <div class="img">
+                    <img src="./img/1984.webp" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">1984</h1>
+                    <p class="writer">Writer: George Orwell</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item allama" id="AllamaIqbal">
+                <div class="img">
+                    <img src="./img/rukhshanda.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Allama Iqbal Ki Rukhshanda Yadien</h1>
+                    <p class="writer">Writer: Allama Iqbal</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item allama" id="kulyatEIqbal">
+                <div class="img">
+                    <img src="./img/kulyateiqbal.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Kulyat e Iqbal</h1>
+                    <p class="writer">Writer: Allama Iqbal</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item james" id="transformYourHabits">
+                <div class="img">
+                    <img src="./img/transform your habits.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Transform Your Habits</h1>
+                    <p class="writer">Writer: james Clear</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item skotts" id="tenderIsNight">
+                <div class="img">
+                    <img src="./img/tender.jpeg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Tender is The Night</h1>
+                    <p class="writer">Writer: T.Skotts Fitsgrazer</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item george" id="visionOfDystopia">
+                <div class="img">
+                    <img src="./img/visionof dystopia.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Visions Of Dystopia</h1>
+                    <p class="writer">Writer: George Orwell</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <div class="item chaudhary" id="NowOrNever">
+                <div class="img">
+                    <img src="./img/now or never.jpg" alt="Book Image">
+                </div>
+                <div class="about">
+                    <h1 class="name">Now or Never</h1>
+                    <p class="writer">Writer: Chaudhary Rehmat Ali</p>
+                    <p class="price">$10</p>
+                </div>
+                <div class="buy">
+                    <button><p>Purchase</p> <i class="fa fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            <h1 id="nonMsg">Item You Are Looking For is Currently Not Available..</h1>
+        </div>
+    </div>
+    <script>
+        var a = document.getElementById("input")
+        var all = document.querySelectorAll(".item")
+        var allama = document.querySelectorAll(".allama")
+        var george = document.querySelectorAll(".george")
+        var james = document.querySelectorAll(".james")
+        var robert = document.querySelectorAll(".robert")
+        var skotts = document.querySelectorAll(".skotts")
+        var chaudhary = document.querySelectorAll(".chaudhary")
+        function c() {
+            if (a.value.toUpperCase() == "ATOMIC HABITS") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("atomicHabits").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "RICH DAD POOR DAD") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("RichDadPoorDad").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "THE GREAT GATSBY") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("TheGreatGastby").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "BAGH O BAHAR") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("BaghOBahar").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "1984" || a.value.toUpperCase() == "NINETEEN EIGHTY FOUR") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("nineteen84").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "ALLAMA IQBAL") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("AllamaIqbal").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "KULYAT E IQBAL") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("kulyatEIqbal").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "TRANSFORM YOUR HABITS") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("transformYourHabits").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "TENDER IS THE NIGHT") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("tenderIsNight").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "VISIONS OF DYSTOPIA") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("visionOfDystopia").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else if (a.value.toUpperCase() == "NOW OR NEVER") {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("NowOrNever").style.display = "flex";
+                document.getElementById("nonMsg").style.display = "none"
+            }
+            else {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("nonMsg").style.display = "block"
+            }
+        }
+        function r(){
+            for (var i = 0; i < all.length; i++) {
+                all[i].style.display = 'flex';
+            }
+        }
+        function writer(){
+            var writer = prompt("Search By Writer Name").toUpperCase()
+            if(writer == "ALLAMA IQBAL"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < allama.length; i++) {
+                    allama[i].style.display = 'flex';
+                }
+            }
+            else if(writer == "GEORGE ORWELL"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < george.length; i++) {
+                    george[i].style.display = 'flex';
+                }
+            }
+            else if(writer == "JAMES CLEAR"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < james.length; i++) {
+                    james[i].style.display = 'flex';
+                }
+            }
+            else if(writer == "CHAUDHARY REHMAT ALI"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < chaudhary.length; i++) {
+                    chaudhary[i].style.display = 'flex';
+                }
+            }
+            else if(writer == "ROBERT T KIOSAKI"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < robert.length; i++) {
+                    robert[i].style.display = 'flex';
+                }
+            }
+            else if(writer == "T SKOTTS FITSGAZER"){
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                for (var i = 0; i < skotts.length; i++) {
+                    skotts[i].style.display = 'flex';
+                }
+            }
+            else {
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = 'none';
+                }
+                document.getElementById("nonMsg").style.display = "block"
+            }
+        }
+        </script>
+</body>
+
+</html>
